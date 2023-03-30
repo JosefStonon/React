@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDom from 'react-dom';
 
-ReactDOM.render(
-  <h1>Ola mundo!!!</h1>,
-  document.getElementById('root'),
-);
+ReactDom.render(
+    <h1>fuck mundo</h1>,
+    document.getElementById('root')
+)
