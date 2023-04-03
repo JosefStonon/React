@@ -1,28 +1,34 @@
 import React from "react";
 import Post from './Post';
+import Header from './Header';
+
+const posts = [
+    { title: 'John', subtitle: 'Doctor', likes: 20 },
+    { title: 'Billy', subtitle: 'Driver', likes: 30 },
+    { title: 'jack', subtitle: 'Police Officer', likes: 40 },
+];
 
 function App() {
     return  (
         <>
-            <h1>Componet App</h1>
-            <h2>subtitulo</h2>
+            <Header title="Josef Sartorera">
+                <span>fucking billi</span>
+            </Header>
 
             <hr/>
 
-            <Post
-             title="Titulo da noticia 015"
-             subtitle="Subtitulo da noticia 01"
-            />
+            {posts.map(post => (
+                <Post
+                    likes={post.likes}
+                    post={{
+                        title: post.title,
+                        subtitle: post.subtitle,
+                    }}
+                />
 
-            <Post
-             title="Titulo da noticia 02"
-             subtitle="Subtitulo da noticia 02"
-            />
+            ))}
 
-            <Post
-             title="Titulo da noticia 03"
-             subtitle="Subtitulo da noticia 03"
-            />
+
         </>
     )
 }
