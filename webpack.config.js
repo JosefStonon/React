@@ -1,24 +1,23 @@
 const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
-
     entry: path.resolve(__dirname, 'src', 'index.js'),
     mode: 'production',
-    output: {
+    output:{
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle[hash].js',
+        filename: 'bundle[hash].js'
     },
 
-    performance: {
+    performance:  {
         maxEntrypointSize: 512000,
         maxAssetSize: 512000
-   },
+    },
 
     plugins: [
-        new htmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public', 'index.html'),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'public', 'index.html')
         }),
 
         new CleanWebpackPlugin()
@@ -37,6 +36,5 @@ module.exports = {
     devServer: {
         port: 3000,
     }
+}
 
-
-};

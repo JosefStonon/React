@@ -1,36 +1,55 @@
-import React from "react";
+
+import React, { useState } from 'react';
 import Post from './Post';
-import Header from './Header';
+import Body from './Body';
 
-const posts = [
-    { title: 'John', subtitle: 'Doctor', likes: 20 },
-    { title: 'Billy', subtitle: 'Driver', likes: 30 },
-    { title: 'jack', subtitle: 'Police Officer', likes: 40 },
-];
 
-function App() {
-    return  (
+
+export default function App() {
+
+    const [posts, setPosts] = useState([
+        { id: Math.random(), name: 'josé', lastName: 'Sartori', likes: 20},
+        { id: Math.random(), name: 'maria', lastName: 'tonon', likes: 30},
+        { id: Math.random(), name: 'tiao', lastName: 'luiz', likes: 40},
+    ])
+
+    function handleReflash() {
+        setTimeout(() => {
+
+
+            setPosts((prevState) => [
+                ...prevState,
+                {
+                    id: Math.random(),
+                    name: `name#01${prevState.length +1}`,
+                    lastName: `lastName#01${prevState.length +1}`,
+                    likes: 20
+                   }
+            ])
+        }, 2000)
+
+
+    }
+
+
+    return (
         <>
-            <Header title="Josef Sartorera">
-                <span>fucking billi</span>
-            </Header>
-
-            <hr/>
+            <Post title='Josef Fodão'
+                  subtitle='Embaçado de mais!'>
+                    <button onClick={handleReflash}>Atualizar</button>
+            </Post>
 
             {posts.map(post => (
-                <Post
+                <Body
+                    key={post.id}
                     likes={post.likes}
                     post={{
-                        title: post.title,
-                        subtitle: post.subtitle,
+                        name: post.name,
+                        lastName: post.lastName
                     }}
+
                 />
-
             ))}
-
-
         </>
     )
 }
-
-export default App;
