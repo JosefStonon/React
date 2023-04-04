@@ -8,9 +8,9 @@ import Body from './Body';
 export default function App() {
 
     const [posts, setPosts] = useState([
-        { id: Math.random(), name: 'josé', lastName: 'Sartori', likes: 20},
-        { id: Math.random(), name: 'maria', lastName: 'tonon', likes: 30},
-        { id: Math.random(), name: 'tiao', lastName: 'luiz', likes: 40},
+        { id: Math.random(), name: 'josé', lastName: 'zero', likes: 20},
+        { id: Math.random(), name: 'maria', lastName: 'um', likes: 30},
+        { id: Math.random(), name: 'tiao', lastName: 'dois', likes: 40},
     ])
 
     function handleReflash() {
@@ -34,8 +34,8 @@ export default function App() {
 
     return (
         <>
-            <Post title='Josef Fodão'
-                  subtitle='Embaçado de mais!'>
+            <Post title='Pagina Teste'
+                  subtitle='React!'>
                     <button onClick={handleReflash}>Atualizar</button>
             </Post>
 
