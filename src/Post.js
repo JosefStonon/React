@@ -19,3 +19,7 @@ Post.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired
 }
+
+Post.defaultProps = {
+  title: `JStack's Blog`
+}

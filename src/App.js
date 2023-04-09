@@ -34,7 +34,7 @@ export default function App() {
   return (
     <>
       <Post
-      title='JStack'
+      
       subtitle='New Blog'>
         <button onClick={handleRefresh}>Refresh</button>
       </Post>
