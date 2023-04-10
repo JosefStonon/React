@@ -5,11 +5,21 @@ import Blog from './Blog';
 
 export default function App() {
 
+  const [theme, setTheme] = useState('dark');
+
   const [posts, setPost] = useState([
     {id: Math.random(), name: 'name#01', lastName: 'lastName#01', likes: 10},
     {id: Math.random(), name: 'name#02', lastName: 'lastName#02', likes: 20},
     {id: Math.random(), name: 'name#03', lastName: 'lastName#03', likes: 30},
   ]);
+
+  function handleToogleTheme() {
+    setTheme((prevState) => 
+      prevState === 'dark'
+        ? 'light'
+        : 'dark'
+     )
+  }
 
   function handleRefresh() {
       setTimeout(() => {
@@ -34,8 +44,8 @@ export default function App() {
   return (
     <>
       <Post
-      
-      subtitle='New Blog'>
+        onToggleTheme={handleToogleTheme}
+      >
         <button onClick={handleRefresh}>Refresh</button>
       </Post>
 
@@ -49,6 +59,7 @@ export default function App() {
               name: post.name,
               lastName: post.lastName
             }}
+            theme={theme}
 
           />
       ))}
