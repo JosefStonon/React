@@ -1,20 +1,26 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 
+import Header from './Header';
 import Post from './Post';
-import Blog from './Blog';
-import { ThemeProvider } from './ThemeContext';
+import Button from './Button';
 
 
 export default function App() {
+  const [theme, setTheme] = useState('dark')
 
 
   const [posts, setPost] = useState([
-    {id: Math.random(), name: 'name#01', lastName: 'lastName#01', likes: 10},
-    {id: Math.random(), name: 'name#02', lastName: 'lastName#02', likes: 20},
-    {id: Math.random(), name: 'name#03', lastName: 'lastName#03', likes: 30},
+    {id: Math.random(), name: 'maria#01', lastName: 'lastname#01', likes: 10, read: false},
+    {id: Math.random(), name: 'maria#02', lastName: 'lastname#02', likes: 20, read: true},
+    {id: Math.random(), name: 'maria#03', lastName: 'lastname#03', likes: 30, read: false},
+    {id: Math.random(), name: 'maria#03', lastName: 'lastname#03', likes: 30, read: true},
   ]);
 
-  
+  function handleToggleTheme() {
+    setTheme((prevState) => prevState == 'dark' 
+    ? 'light' 
+    : 'dark')
+  }
 
   function handleRefresh() {
       setTimeout(() => {
@@ -22,44 +28,42 @@ export default function App() {
           ...prevState,
           {
             id: Math.random(), 
-            name: `name#01${prevState.length + 1}`, 
-            lastName: `lastName01${prevState.length + 1}`, 
-            likes: `${prevState.length + 1}`
+            name: `maria#01${posts.length + 1}`, 
+            lastName: `lastname#01${posts.length + 1}`, 
+            likes: posts.length + 1
           }
         ])
-      }, 1000);
-  };
+      }, 1500);
+  }
 
-  function handleRemovePost(postId) {
+  function handleRemove(postId) {
     setPost((prevState) => (
       prevState.filter(post => post.id !== postId)
     ))
   }
-
   return (
-    <ThemeProvider>
-      <Post
-        
-      >
-        <button onClick={handleRefresh}>Refresh</button>
-      </Post>
 
-      {posts.map(post => (
-          <Blog 
+    <>
+        <Header
+        theme={theme}
+          onToggleTheme={handleToggleTheme}
+        >
+
+          <Button theme={theme} onClick={handleRefresh}>Refresh</Button>
+        </Header>
+       
+
+        {posts.map(post => (
+          <Post 
           key={post.id}
             likes={post.likes}
-            onRemove={handleRemovePost}
-            post={{
-              id: post.id,
-              name: post.name,
-              lastName: post.lastName
-            }}
-
-
+            onRemove={handleRemove}
+            post={post}
+            theme={theme}
+          
           />
-      ))}
-    </ThemeProvider>
-
+        ))}
+    </>
 
   )
 }

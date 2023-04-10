@@ -1,34 +1,36 @@
-import React, { useContext } from 'react';
+import React from "react";
 import PropTypes from 'prop-types';
-import Button from './Button';
 
-import { ThemeContext } from './ThemeContext';
+import PostHeader from './PostsHeader';
+
 
 export default function Post(props) {
-  const { onToggleTheme } = useContext(ThemeContext);
-
   return (
     <>
-        <h1>{props.title}</h1>
-        <h3>{props.subtitle}</h3>
-        <Button onClick={onToggleTheme}>
-          Mudar o tema
-        </Button>
-        {props.children}
-        <hr />
-        
+       <article>
+        <PostHeader 
+        theme={props.theme}
+          onRemove={props.onRemove}
+          post={{
+            id: props.post.id,
+            name: props.post.name,
+            read: props.post.read,
+            likes: props.post.likes
+          }} 
+        />
+       </article>
 
     </>
   )
 }
 
-Post.propTypes = {
-  onToggleTheme: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired
-}
-
-Post.defaultProps = {
-  title: `JStack's Blog`,
-  subtitle: `New Blog`
+Post.proptypes = {
+  theme: PropTypes.string.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  post: PropTypes.shape({
+    likes: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    read: PropTypes.bool.isRequired
+  }).isRequired
 }
