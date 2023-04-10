@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, createContext } from 'react';
 
 import Post from './Post';
 import Blog from './Blog';
+import { ThemeProvider } from './ThemeContext';
+
 
 export default function App() {
 
-  const [theme, setTheme] = useState('dark');
 
   const [posts, setPost] = useState([
     {id: Math.random(), name: 'name#01', lastName: 'lastName#01', likes: 10},
@@ -13,13 +14,7 @@ export default function App() {
     {id: Math.random(), name: 'name#03', lastName: 'lastName#03', likes: 30},
   ]);
 
-  function handleToogleTheme() {
-    setTheme((prevState) => 
-      prevState === 'dark'
-        ? 'light'
-        : 'dark'
-     )
-  }
+  
 
   function handleRefresh() {
       setTimeout(() => {
@@ -42,9 +37,9 @@ export default function App() {
   }
 
   return (
-    <>
+    <ThemeProvider>
       <Post
-        onToggleTheme={handleToogleTheme}
+        
       >
         <button onClick={handleRefresh}>Refresh</button>
       </Post>
@@ -59,11 +54,11 @@ export default function App() {
               name: post.name,
               lastName: post.lastName
             }}
-            theme={theme}
+
 
           />
       ))}
-    </>
+    </ThemeProvider>
 
 
   )
