@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import Header from './Header';
+
 import Post from './Post';
 import Button from './Button';
+import { ThemeProvider } from './ThemeContext';
 
 
 export default function App() {
-  const [theme, setTheme] = useState('dark')
 
 
   const [posts, setPost] = useState([
@@ -16,11 +17,7 @@ export default function App() {
     {id: Math.random(), name: 'maria#03', lastName: 'lastname#03', likes: 30, read: true},
   ]);
 
-  function handleToggleTheme() {
-    setTheme((prevState) => prevState == 'dark' 
-    ? 'light' 
-    : 'dark')
-  }
+ 
 
   function handleRefresh() {
       setTimeout(() => {
@@ -42,11 +39,9 @@ export default function App() {
     ))
   }
   return (
+    <ThemeProvider>
 
-    <>
         <Header
-        theme={theme}
-          onToggleTheme={handleToggleTheme}
         >
 
           <Button theme={theme} onClick={handleRefresh}>Refresh</Button>
@@ -58,12 +53,10 @@ export default function App() {
           key={post.id}
             likes={post.likes}
             onRemove={handleRemove}
-            post={post}
-            theme={theme}
-          
+            post={post}          
           />
         ))}
-    </>
+    </ThemeProvider>
 
   )
 }
