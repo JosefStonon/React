@@ -1,32 +1,34 @@
-import React from 'react';
+import React from "react";
 import PropTypes from 'prop-types';
-import Button from './Button';
+
+import PostHead from "./PostsHeader";
+
 
 export default function Post(props) {
-
   return (
     <>
-        <h1>{props.title}</h1>
-        <h3>{props.subtitle}</h3>
-        <Button theme={props.theme} onClick={props.onToggleTheme}>
-          Mudar o tema
-        </Button>
-        {props.children}
-        <hr />
-        
-
+        <PostHead 
+          onRemove={props.onRemove}
+          post={{
+            id: props.post.id,
+            likes: props.post.likes,
+            name: props.post.name,
+            lastName: props.post.name,
+            read: props.post.read
+          }}
+        />
     </>
   )
 }
 
 Post.propTypes = {
-  theme: PropTypes.string.isRequired,
-  onToggleTheme: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired
-}
+  onRemove: PropTypes.func.isRequired,
+  post: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    read: PropTypes.bool.isRequired,
+    likes: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+  })
 
-Post.defaultProps = {
-  title: `JStack's Blog`,
-  subtitle: `New Blog`
 }

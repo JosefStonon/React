@@ -12,31 +12,28 @@ module.exports = {
 
   performance: {
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+    maxAssetSize: 512000
   },
 
   plugins: [
-    
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'public', 'index.html')
-      }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html')
+    }),
 
-      new CleanWebpackPlugin()
-    
+    new CleanWebpackPlugin()
   ],
 
   module: {
     rules: [
       {
-        test: /\.js?$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
 
   devServer: {
-    port: 3000,
+    port: 3000
   }
-
 }

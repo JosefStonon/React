@@ -1,70 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Post from './Post';
-import Blog from './Blog';
+import Post from "./Post";
+import Header from "./Header";
+import Button from "./Button";
+
+import { ThemeProvider } from "./ThemeContext";
+
 
 export default function App() {
 
-  const [theme, setTheme] = useState('dark');
-
   const [posts, setPost] = useState([
-    {id: Math.random(), name: 'name#01', lastName: 'lastName#01', likes: 10},
-    {id: Math.random(), name: 'name#02', lastName: 'lastName#02', likes: 20},
-    {id: Math.random(), name: 'name#03', lastName: 'lastName#03', likes: 30},
+    {id: Math.random(), name: 'name#02', lastName: 'last#02', likes: 20, read: false},
+    {id: Math.random(), name: 'name#03', lastName: 'last#03', likes: 30, read: true},
+    {id: Math.random(), name: 'name#04', lastName: 'last#04', likes: 40, read: false},
+    {id: Math.random(), name: 'name#05', lastName: 'last#05', likes: 50, read: false},
   ]);
 
-  function handleToogleTheme() {
-    setTheme((prevState) => 
-      prevState === 'dark'
-        ? 'light'
-        : 'dark'
-     )
+  function handleToogleReflash() {
+    setTimeout(() => {
+      setPost((prevState) => [
+        ...prevState,
+        {
+          id: Math.random(),
+          name: `name#02${posts.length + 1 }`, 
+          lastName: `last#02${posts.length + 1 }`, 
+          likes: 20, 
+          read: false
+        }
+      ])
+
+  }, 1500)
   }
 
-  function handleRefresh() {
-      setTimeout(() => {
-        setPost((prevState) => [
-          ...prevState,
-          {
-            id: Math.random(), 
-            name: `name#01${prevState.length + 1}`, 
-            lastName: `lastName01${prevState.length + 1}`, 
-            likes: `${prevState.length + 1}`
-          }
-        ])
-      }, 1000);
-  };
-
-  function handleRemovePost(postId) {
+  function handleRemove(delId) {
     setPost((prevState) => (
-      prevState.filter(post => post.id !== postId)
+      prevState.filter(post => post.id !== delId)
     ))
   }
 
+
   return (
-    <>
-      <Post
-        onToggleTheme={handleToogleTheme}
-      >
-        <button onClick={handleRefresh}>Refresh</button>
-      </Post>
+    <ThemeProvider>
+      <Header>
+        <Button onClick={handleToogleReflash}>Refresh</Button>
+      </Header>
+        
+
 
       {posts.map(post => (
-          <Blog 
-          key={post.id}
-            likes={post.likes}
-            onRemove={handleRemovePost}
-            post={{
-              id: post.id,
-              name: post.name,
-              lastName: post.lastName
-            }}
-            theme={theme}
-
-          />
+        <Post 
+          key= {post.id}
+          onRemove={handleRemove}
+          post={post}
+        />
       ))}
-    </>
-
-
+    </ThemeProvider>  
   )
 }
