@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Button from "./Button";
 
+import styles from './Header.css';
+
 import { ThemeContext } from "./ThemeContext";
 
 export default function Header(props) {
@@ -10,9 +12,11 @@ export default function Header(props) {
   const { onToggleTheme } = useContext(ThemeContext)
 
   return (
-    <>
-      <h1>{props.title}</h1>
-      <h3>{props.subtitle}</h3>
+    <div
+      
+    >
+      <h1 className={styles.title}>{props.title}</h1>
+      <h3 className={styles.subtitle}>{props.subtitle}</h3>
       <Button
         onClick={onToggleTheme}
       >Mudar tema</Button>
@@ -23,7 +27,7 @@ export default function Header(props) {
       <hr />
       <hr />
       
-    </>
+    </div>
   )
 }
 
