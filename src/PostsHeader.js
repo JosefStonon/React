@@ -1,42 +1,38 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import Button from "./Button";
-
-export default function PostHead(props) {
+export default function PostHeader(props) {
   return (
-
-    <>
-        <strong>
-          {props.post.read && <s>{props.post.name}</s>}
-          {!props.post.read && props.post.name}
-        </strong>
-          <br />
+     <>
         <article>
+          <strong>
+            {props.post.read && <s>{props.post.name}</s>}
+            {!props.post.read && props.post.name}
+          </strong>
+          
+          <br />
           Likes: {props.post.likes}
           <br />
           Name: {props.post.name}
           <br />
-          lastName: {props.post.lastName}
-          <br />
-
-          <Button onClick={() => props.onRemove(props.post.id)}>Delete</Button>
-          {props.children}
-          <hr />
+          LastName: {props.post.lastName}
         </article>
+        <br />
+        {props.children}  
 
-    </>
+  
+
+
+
+     </>
   )
 }
 
-PostHead.propTypes = {
-  onRemove: PropTypes.func.isRequired,
+PostHeader.proptypes = {
   post: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    read: PropTypes.bool.isRequired,
+    likes: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
-    likes: PropTypes.number.isRequired,
+    read: PropTypes.bool.isRequired,
   })
-
 }

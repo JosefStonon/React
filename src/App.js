@@ -1,59 +1,74 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Post from "./Post";
-import Header from "./Header";
-import Button from "./Button";
+import Header from './Header';
+import Post from './Post';
+import Button from './Button';
 
-import { ThemeProvider } from "./ThemeContext";
-
+import { ThemeProvider } from './ThemeContext';
 
 export default function App() {
 
   const [posts, setPost] = useState([
-    {id: Math.random(), name: 'name#02', lastName: 'last#02', likes: 20, read: false},
-    {id: Math.random(), name: 'name#03', lastName: 'last#03', likes: 30, read: true},
-    {id: Math.random(), name: 'name#04', lastName: 'last#04', likes: 40, read: false},
-    {id: Math.random(), name: 'name#05', lastName: 'last#05', likes: 50, read: false},
+    {id: Math.random(), name: 'name#01', lastName: 'last#01', likes: 10, read: true , removed: true},
+    {id: Math.random(), name: 'name#02', lastName: 'last#02', likes: 20, read: false , removed: false},
+    {id: Math.random(), name: 'name#03', lastName: 'last#03', likes: 30, read: false , removed: false},
+    {id: Math.random(), name: 'name#04', lastName: 'last#04', likes: 40, read: false , removed: false},
   ]);
 
-  function handleToogleReflash() {
+  function handlerReflash() {
     setTimeout(() => {
       setPost((prevState) => [
         ...prevState,
         {
-          id: Math.random(),
-          name: `name#02${posts.length + 1 }`, 
-          lastName: `last#02${posts.length + 1 }`, 
-          likes: 20, 
-          read: false
+          id: Math.random(), 
+          name: `name#01${posts.length + 1 }`, 
+          lastName: `last#01${posts.length + 1}`, 
+          likes: 10, 
+          read: false,
+          removed
+
         }
       ])
+    })
 
-  }, 1500)
+
   }
 
-  function handleRemove(delId) {
-    setPost((prevState) => (
-      prevState.filter(post => post.id !== delId)
-    ))
+  function handleDelete(DelId) {
+    setPost((prevState) => prevState.map(
+        post => (
+          post.id === DelId
+          ? {...post, removed: true}
+          : post
+      ))
+    )
   }
 
 
   return (
+
     <ThemeProvider>
       <Header>
-        <Button onClick={handleToogleReflash}>Refresh</Button>
-      </Header>
+        <Button
+          onClick={handlerReflash}
+        >
+          ReFlash
+        </Button>
         
 
+      </Header>
+    
+      
 
       {posts.map(post => (
-        <Post 
-          key= {post.id}
-          onRemove={handleRemove}
-          post={post}
-        />
+          <Post 
+            key={post.name}
+            onRemove={handleDelete}
+              post={post}
+          />
       ))}
-    </ThemeProvider>  
+    </ThemeProvider>
   )
+
+
 }
