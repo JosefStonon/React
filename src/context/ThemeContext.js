@@ -1,5 +1,4 @@
-import React, { useState, createContext } from "react";
-
+import React, { useState, createContext } from 'react';
 
 export const ThemeContext = createContext();
 
@@ -7,7 +6,7 @@ export function ThemeProvider(props) {
 
   const [theme, setTheme] = useState('dark');
 
-  function handleToggleTheme() {
+  function handleoggleTheme() {
     setTheme((prevState) => (
       prevState === 'dark'
       ? 'light'
@@ -16,15 +15,14 @@ export function ThemeProvider(props) {
   }
 
 
-  return (
 
-    <ThemeContext.Provider
-    value={{theme, 
-            onToggleTheme: handleToggleTheme,        
-    }}
-    >
+    return (
+      <ThemeContext.Provider value={{
+        theme,
+        onToggleTheme: handleoggleTheme,
+      }}>
+      
       {props.children}
-    </ThemeContext.Provider>
-
-  );
+      </ThemeContext.Provider>
+    )
 }
