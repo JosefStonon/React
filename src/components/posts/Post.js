@@ -10,7 +10,7 @@ export default function Post(props) {
   return (
 
 
-          <Container removed={props.removed}>
+          <Container removed={props.post.removed}>
               <PostHeader 
                 post={{
                   id: props.post.id,
@@ -40,13 +40,13 @@ export default function Post(props) {
 }
 
 Post.prototype = {
-  removed: PropTypes.bool.isRequired,
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
     likes: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     read: PropTypes.bool.isRequired,
+    removed: PropTypes.bool.isRequired,
   })
 
 }
