@@ -16,9 +16,9 @@ export default function PostHeader(props) {
           Name: {props.post.name}
           <br />
           LastName: {props.post.lastName}
+        {props.children}  
         </article>
         <br />
-        {props.children}  
 
   
 

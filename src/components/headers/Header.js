@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from './Button';
+import Button from '../Button';
 
-import style from './Header.scss';
+import Title from '../Title';
 
-import { ThemeContext } from './ThemeContext';
+
+
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Header(props) {
 
@@ -13,8 +15,8 @@ export default function Header(props) {
 
   return (
 
-    <div className={style.title}>
-        <h1>{props.title}</h1>
+    <>
+        <Title>{props.title}</Title>
    
         <h3>{props.subtitle}</h3>
 
@@ -32,7 +34,7 @@ export default function Header(props) {
         <hr />
         <hr />
 
-    </div>
+    </>
   )
 }
 
